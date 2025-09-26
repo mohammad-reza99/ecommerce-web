@@ -1,7 +1,53 @@
 import React from "react";
 import Logo from "../assets/Logo.png";
 import { IoMdSearch } from "react-icons/io";
-import { FaCartShopping } from "react-icons/fa6";
+import { FaCaretDown, FaCartShopping } from "react-icons/fa6";
+import DarkMode from "./DarkMode";
+
+const Menu = [
+  {
+    id: 1,
+    name: "Home",
+    link: "/#",
+  },
+  {
+    id: 2,
+    name: "Top Rated",
+    link: "/#services",
+  },
+  {
+    id: 3,
+    name: "Kids Wear",
+    link: "/#",
+  },
+  {
+    id: 4,
+    name: "Mens Wear",
+    link: "/#",
+  },
+  {
+    id: 5,
+    name: "Electronics",
+    link: "/#",
+  },
+];
+const DropdownLinks = [
+  {
+    id: 1,
+    name: "Trending Products",
+    link: "/#",
+  },
+  {
+    id: 2,
+    name: "Best Selling",
+    link: "/#",
+  },
+  {
+    id: 3,
+    name: "Top Rated",
+    link: "/#",
+  },
+];
 
 const Navbar = () => {
   return (
@@ -21,7 +67,7 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="search"
-                className="w-[200px] sm:w-[200px] group-hover:w-[300px] transition-all duration-300 rounded-full border border-gray-300 pl-8 py-1 focus:outline-none focus:border-1 focus:border-orange-400"
+                className="w-[200px] sm:w-[200px] group-hover:w-[300px] transition-all duration-300 rounded-full border border-gray-300 pl-8 py-1 focus:outline-none focus:border-[1px] focus:border-orange-400 dark:border-gray-500 dark:bg-gray-800"
               />
               <IoMdSearch className="absolute top-1/2 left-2 -translate-y-1/2 text-gray-500 group-hover:text-amber-500" />
             </div>
@@ -36,11 +82,50 @@ const Navbar = () => {
               <FaCartShopping className="text-xl drop-shadow-sm cursor-pointer" />
             </button>
             {/* Darkmode Switch */}
+            <div>
+              <DarkMode />
+            </div>
           </div>
         </div>
       </div>
       {/* lower Navbar */}
-      <div></div>
+      <div className="flex justify-center">
+        <ul className="sm:flex hidden items-center gap-4">
+          {Menu.map((data) => (
+            <li key={data.id}>
+              <a
+                href={data.link}
+                className="inline-block px-4 hover:text-amber-600 duration-200"
+              >
+                {data.name}
+              </a>
+            </li>
+          ))}
+          {/* Simple dropdown and Links */}
+          <li className="group relative cursor-pointer">
+            <a href="#" className="flex items-center gap-[2px] py-2">
+              Tranding
+              <span>
+                <FaCaretDown className="transition-all duration-200 group-hover:rotate-180" />
+              </span>
+            </a>
+            <div className="absolute z[9999] hidden group-hover:block w-[200px] rounded-md bg-white p-2 text-black shadow-md">
+              <ul>
+                {DropdownLinks.map((data) => (
+                  <li key={data.id}>
+                    <a
+                      href={data.link}
+                      className="inline-block w-full rounded-md p-2 hover:bg-amber-600/20"
+                    >
+                      {data.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };
